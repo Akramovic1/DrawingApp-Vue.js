@@ -110,7 +110,6 @@
 </body>
 </template>
 <script>
-import axios from 'axios'
 export default {
   
   data(){
@@ -164,46 +163,28 @@ export default {
         this.tempBG = this.bgColor;
         if(this.isCircle){
           var radius = Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
-
-          this.arr = [x1,y1,radius,this.lineWidth,this.strokeColor,this.bgColor,"","Ellipticals","Circle"]
-          axios.get("http://localhost:8085/api/draw", {params: {arr: this.arr+''}})
-            .then(res => console.log(res))
-          
           ctx.arc(x1, y1, radius, 0, 2 * Math.PI);   
         } else if(this.isRectangle){
 
-          this.arr = [x1,y1,x2-x1,y2-y1,this.lineWidth,this.strokeColor,this.bgColor,"","Polygons","Rectangle"]
-          axios.get("http://localhost:8085/api/draw", {params: {arr: this.arr+''}})
-            .then(res => console.log(res))
-
           ctx.fillRect(x1, y1, x2-x1, y2-y1);
         }else if(this.isEllipse){
-          this.arr = [x1,y1,x2-x1,y2-y1,"0",this.lineWidth,this.strokeColor,this.bgColor,"","Ellipticals","Ellipse"]
-          axios.get("http://localhost:8085/api/draw", {params: {arr: this.arr+''}})
-            .then(res => console.log(res))
+
 
           ctx.ellipse(x1, y1, x2-x1, y2-y1, 0, 0, 2 * Math.PI );
         } else if(this.isSegment){
-          this.arr = [x1,y1,x2,y2,this.lineWidth,this.strokeColor,this.bgColor,"","Segments","lineSegment"]
-          axios.get("http://localhost:8085/api/draw", {params: {arr: this.arr+''}})
-            .then(res => console.log(res))
 
           ctx.moveTo(x1, y1)
           ctx.lineTo(x2, y2)
           ctx.lineTo(x1, y1)
           ctx.closePath();
         } else if(this.isTriangle){
-          this.arr = [x1,y1,x2,y2,x1 - (x2-x1),y2,this.lineWidth,this.strokeColor,this.bgColor,"","Polygons","Triangle"]
-          axios.get("http://localhost:8085/api/draw", {params: {arr: this.arr+''}})
-            .then(res => console.log(res))
+          
           ctx.moveTo(x1, y1)
           ctx.lineTo(x2, y2)
           ctx.lineTo(x1 - (x2-x1), y2)
           ctx.closePath();
         } else if (this.isTriangleRight){
-          this.arr = [x1,y1,x2,y2,x1,y2,this.lineWidth,this.strokeColor,this.bgColor,"","Polygons","Triangle"]
-          axios.get("http://localhost:8085/api/draw", {params: {arr: this.arr+''}})
-            .then(res => console.log(res))
+   
           ctx.moveTo(x1, y1)
           ctx.lineTo(x2, y2)
           ctx.lineTo(x1, y2)
@@ -237,9 +218,7 @@ export default {
         this.isDrawing = false
         this.pushCanvas();
       }if(this.isBrush|| this.isEraser){
-        this.arr = ["0","0","0","0","0","#FFFFFF","#FFFFFF","","Segments","lineSegment"]
-          axios.get("http://localhost:8085/api/draw", {params: {arr: this.arr+''}})
-            .then(res => console.log(res))
+
       }
     },
     isLineSegmentTool(){
@@ -389,8 +368,7 @@ export default {
           this.canvas.clearRect(0, 0, this.canvas.canvas.width, this.canvas.canvas.height);
         this.canvas.drawImage(canvasPic, 0, 0);
         }
-        axios.get("http://localhost:8085/api/undo")
-          .then(res => console.log(res))
+
 
       }
       console.log('undo step', (this.step +1)+ ":" + ' length', this.canvasArray.length);
@@ -403,8 +381,7 @@ export default {
         var can = this.canvas;
         canvasPic.onload = function () { can.drawImage(canvasPic, 0, 0); }
         console.log('redo step', this.step + ":" + ' length', this.canvasArray.length);
-        axios.get("http://localhost:8085/api/redo")
-          .then(res => console.log(res))
+
        }
     },
     pushCanvas() {
@@ -416,8 +393,7 @@ export default {
     save(){
     let data =this.canvasArray[this.step];
     this.url =data;
-    axios.get("http://localhost:8085/api/save")
-          .then(res => console.log(res))
+
     },
     load(e){
             var self = this;
@@ -440,8 +416,7 @@ export default {
              filename = filename.substring(1);
              }
              }
-             axios.get("http://localhost:8085/api/load", {params: {saveName : filename}})
-              .then(res => console.log(res))
+
              console.log('FileName : '+filename+' & path : '+fullPath );
     },
      drawCanvasImage(img) {
