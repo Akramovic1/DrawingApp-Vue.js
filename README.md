@@ -3,20 +3,19 @@
 ![](image.PNG)
 
 ## Options
-Brush: Free drawing
-Eraser
-Draw Shapes:
+* Brush: Free drawing
+* Eraser
+* Draw Shapes:
  * Line
  * Triangle
  * Circle
  * Ellipse
  * Square
-
-UNDO
-REDO
-Clear
-Download
-Import
+* UNDO
+* REDO
+* Clear
+* Download
+* Import
 
 ## Project setup
 
