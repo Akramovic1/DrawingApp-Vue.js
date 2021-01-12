@@ -217,8 +217,6 @@ export default {
         this.y = 0
         this.isDrawing = false
         this.pushCanvas();
-      }if(this.isBrush|| this.isEraser){
-
       }
     },
     isLineSegmentTool(){
@@ -340,8 +338,6 @@ export default {
     },
     clear(){
       this.canvas.clearRect(0, 0, this.canvas.canvas.width, this.canvas.canvas.height);
-      axios.get("http://localhost:8085/api/clear")
-          .then(res => console.log(res))
       this.step++;
     },
     earser(){
