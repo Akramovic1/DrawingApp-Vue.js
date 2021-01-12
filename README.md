@@ -6,11 +6,11 @@
 Brush: Free drawing
 Eraser
 Draw Shapes:
-  Line
-  Triangle
-  Circle
-  Ellipse
-  Square
+ * Line
+ * Triangle
+ * Circle
+ * Ellipse
+ * Square
 
 UNDO
 REDO
